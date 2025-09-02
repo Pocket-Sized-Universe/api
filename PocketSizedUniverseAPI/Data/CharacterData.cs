@@ -1,4 +1,4 @@
-﻿using MareSynchronos.API.Data.Enum;
+﻿using PocketSizedUniverse.API.Data.Enum;
 using MessagePack;
 using System.Security.Cryptography;
 

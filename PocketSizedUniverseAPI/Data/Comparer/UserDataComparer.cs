@@ -1,4 +1,4 @@
-﻿namespace MareSynchronos.API.Data.Comparer;
+﻿namespace PocketSizedUniverse.API.Data.Comparer;
 
 public class UserDataComparer : IEqualityComparer<UserData>
 {

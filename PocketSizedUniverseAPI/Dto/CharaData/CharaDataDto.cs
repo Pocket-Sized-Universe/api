@@ -1,4 +1,4 @@
-﻿using MareSynchronos.API.Data;
+﻿using PocketSizedUniverse.API.Data;
 
 namespace PocketSizedUniverse.API.Dto.CharaData;
 

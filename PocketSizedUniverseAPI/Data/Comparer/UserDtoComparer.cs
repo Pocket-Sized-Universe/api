@@ -1,4 +1,4 @@
-﻿using MareSynchronos.API.Dto.User;
+﻿using PocketSizedUniverse.API.Dto.User;
 
 namespace PocketSizedUniverse.API.Data.Comparer;
 

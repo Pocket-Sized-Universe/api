@@ -1,4 +1,4 @@
-﻿using MareSynchronos.API.Data;
+﻿using PocketSizedUniverse.API.Data;
 using MessagePack;
 
 namespace PocketSizedUniverse.API.Dto.User;

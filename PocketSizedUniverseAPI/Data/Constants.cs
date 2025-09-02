@@ -1,4 +1,4 @@
-﻿namespace MareSynchronos.API.Data;
+﻿namespace PocketSizedUniverse.API.Data;
 
 public class Constants
 {

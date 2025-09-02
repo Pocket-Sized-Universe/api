@@ -1,4 +1,4 @@
-﻿namespace MareSynchronos.API.Routes;
+﻿namespace PocketSizedUniverse.API.Routes;
 
 public class MareFiles
 {
