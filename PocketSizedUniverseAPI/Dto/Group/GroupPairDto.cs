@@ -1,7 +1,7 @@
 ﻿using MareSynchronos.API.Data;
 using MessagePack;
 
-namespace MareSynchronos.API.Dto.Group;
+namespace PocketSizedUniverse.API.Dto.Group;
 
 [MessagePackObject(keyAsPropertyName: true)]
 public record GroupPairDto(GroupData Group, UserData User) : GroupDto(Group)

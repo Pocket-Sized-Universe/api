@@ -1,11 +1,11 @@
 ﻿using MareSynchronos.API.Data;
-using MareSynchronos.API.Data.Enum;
-using MareSynchronos.API.Dto;
-using MareSynchronos.API.Dto.CharaData;
-using MareSynchronos.API.Dto.Group;
-using MareSynchronos.API.Dto.User;
+using PocketSizedUniverse.API.Data.Enum;
+using PocketSizedUniverse.API.Dto;
+using PocketSizedUniverse.API.Dto.CharaData;
+using PocketSizedUniverse.API.Dto.Group;
+using PocketSizedUniverse.API.Dto.User;
 
-namespace MareSynchronos.API.SignalR;
+namespace PocketSizedUniverse.API.SignalR;
 
 public interface IMareHub
 {

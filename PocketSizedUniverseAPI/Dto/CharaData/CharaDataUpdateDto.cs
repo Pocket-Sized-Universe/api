@@ -1,6 +1,6 @@
 ﻿using MessagePack;
 
-namespace MareSynchronos.API.Dto.CharaData;
+namespace PocketSizedUniverse.API.Dto.CharaData;
 
 [MessagePackObject(keyAsPropertyName: true)]
 public record CharaDataUpdateDto(string Id)

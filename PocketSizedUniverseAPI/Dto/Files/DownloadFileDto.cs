@@ -1,6 +1,6 @@
 ﻿using MessagePack;
 
-namespace MareSynchronos.API.Dto.Files;
+namespace PocketSizedUniverse.API.Dto.Files;
 
 [MessagePackObject(keyAsPropertyName: true)]
 public record DownloadFileDto : ITransferFileDto

@@ -1,6 +1,6 @@
 ﻿using MareSynchronos.API.Dto.User;
 
-namespace MareSynchronos.API.Data.Comparer;
+namespace PocketSizedUniverse.API.Data.Comparer;
 
 public class UserDtoComparer : IEqualityComparer<UserDto>
 {

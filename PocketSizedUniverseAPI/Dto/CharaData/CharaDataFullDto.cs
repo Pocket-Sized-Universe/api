@@ -1,7 +1,7 @@
 ﻿using MareSynchronos.API.Data;
 using MessagePack;
 
-namespace MareSynchronos.API.Dto.CharaData;
+namespace PocketSizedUniverse.API.Dto.CharaData;
 
 [MessagePackObject(keyAsPropertyName: true)]
 public record CharaDataFullDto(string Id, UserData Uploader) : CharaDataDto(Id, Uploader)

@@ -1,6 +1,6 @@
 ﻿using MareSynchronos.API.Data.Enum;
 
-namespace MareSynchronos.API.Data.Extensions;
+namespace PocketSizedUniverse.API.Data.Extensions;
 
 public static class GroupUserInfoExtensions
 {

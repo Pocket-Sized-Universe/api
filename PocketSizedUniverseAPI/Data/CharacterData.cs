@@ -6,7 +6,7 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace MareSynchronos.API.Data;
+namespace PocketSizedUniverse.API.Data;
 
 [MessagePackObject(keyAsPropertyName: true)]
 public class CharacterData

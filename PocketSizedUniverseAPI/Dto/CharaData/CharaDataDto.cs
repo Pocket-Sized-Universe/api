@@ -1,6 +1,6 @@
 ﻿using MareSynchronos.API.Data;
 
-namespace MareSynchronos.API.Dto.CharaData;
+namespace PocketSizedUniverse.API.Dto.CharaData;
 
 public record CharaDataDto(string Id, UserData Uploader)
 {

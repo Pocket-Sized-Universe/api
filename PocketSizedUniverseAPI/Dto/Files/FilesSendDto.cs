@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MareSynchronos.API.Dto.Files;
+namespace PocketSizedUniverse.API.Dto.Files;
 
 public class FilesSendDto
 {
