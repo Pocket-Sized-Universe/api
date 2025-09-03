@@ -7,10 +7,18 @@ namespace PocketSizedUniverse.P2P;
 /// Base class for DHT operations in the Kademlia distributed hash table
 /// </summary>
 [MessagePackObject(keyAsPropertyName: true)]
+[Union(0, typeof(DhtFindNodeMessage))]
+[Union(1, typeof(DhtFindNodeResponseMessage))]
+[Union(2, typeof(DhtStoreMessage))]
+[Union(3, typeof(DhtStoreResponseMessage))]
+[Union(4, typeof(DhtFindValueMessage))]
+[Union(5, typeof(DhtFindValueResponseMessage))]
+[Union(6, typeof(DhtPingMessage))]
+[Union(7, typeof(DhtPingResponseMessage))]
 public abstract class DhtMessage : P2PMessage
 {
     /// <summary>160-bit node ID for DHT operations</summary>
-    public byte[] NodeId { get; set; } = [];
+    public NodeInfo NodeInfo { get; set; } = new NodeInfo();
 }
 
 /// <summary>
@@ -37,7 +45,7 @@ public class DhtFindNodeResponseMessage : DhtMessage
     public override MessageTypeV2 Type => MessageTypeV2.DhtFindNodeResponse;
     
     /// <summary>List of closest nodes to the target</summary>
-    public List<DhtNodeInfo> Nodes { get; set; } = [];
+    public List<NodeInfo> Nodes { get; set; } = [];
 }
 
 /// <summary>
@@ -55,7 +63,7 @@ public class DhtStoreMessage : DhtMessage
     public byte[] Value { get; set; } = [];
     
     /// <summary>Time-to-live in seconds</summary>
-    public long TTL { get; set; } = 86400; // 24 hours
+    public int TTL { get; set; } = 86400; // 24 hours
     
     /// <summary>Replication factor (how many nodes should store this)</summary>
     public int ReplicationFactor { get; set; } = 3;
@@ -103,7 +111,7 @@ public class DhtFindValueResponseMessage : DhtMessage
     public byte[]? Value { get; set; }
     
     /// <summary>Closest nodes if value not found</summary>
-    public List<DhtNodeInfo> Nodes { get; set; } = [];
+    public List<NodeInfo> Nodes { get; set; } = [];
     
     /// <summary>When the value expires (Unix timestamp)</summary>
     public long? ExpirationTime { get; set; }
@@ -131,34 +139,4 @@ public class DhtPingResponseMessage : DhtMessage
     
     /// <summary>Number of keys stored by this node</summary>
     public int StoredKeys { get; set; } = 0;
-}
-
-/// <summary>
-/// Information about a DHT node
-/// </summary>
-[MessagePackObject(keyAsPropertyName: true)]
-public record DhtNodeInfo
-{
-    /// <summary>160-bit node ID</summary>
-    public byte[] NodeId { get; set; } = [];
-    
-    /// <summary>Node's IP address</summary>
-    public string IPAddress { get; set; } = string.Empty;
-    
-    /// <summary>Node's port number</summary>
-    public int Port { get; set; } = 0;
-    
-    /// <summary>Node's Ed25519 public key</summary>
-    public byte[] PublicKey { get; set; } = [];
-    
-    /// <summary>Last seen timestamp</summary>
-    public long LastSeen { get; set; } = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
-    
-    /// <summary>Node reliability score (0.0 to 1.0)</summary>
-    public float ReputationScore { get; set; } = 1.0f;
-    
-    /// <summary>Services this node provides</summary>
-    public List<string> Services { get; set; } = [];
-    
-    public IPEndPoint ToEndPoint() => new(System.Net.IPAddress.Parse(IPAddress), Port);
 }

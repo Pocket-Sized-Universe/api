@@ -7,10 +7,15 @@ namespace PocketSizedUniverse.P2P;
 /// Base class for relay network operations
 /// </summary>
 [MessagePackObject(keyAsPropertyName: true)]
+[Union(0, typeof(RelayJoinMessage))]
+[Union(1, typeof(RelayJoinResponseMessage))]
+[Union(2, typeof(RelayHeartbeatMessage))]
+[Union(3, typeof(RelayHealthCheckMessage))]
+[Union(4, typeof(RelayHealthResponseMessage))]
 public abstract class RelayMessage : P2PMessage
 {
     /// <summary>Relay node ID</summary>
-    public byte[] RelayNodeId { get; set; } = [];
+    public NodeInfo NodeInfo { get; set; } = new NodeInfo();
 }
 
 /// <summary>
@@ -46,7 +51,7 @@ public class RelayJoinResponseMessage : RelayMessage
     public bool Success { get; set; } = false;
     
     /// <summary>Known relay nodes</summary>
-    public List<RelayNodeInfo> KnownRelays { get; set; } = [];
+    public List<NodeInfo> KnownRelays { get; set; } = [];
     
     /// <summary>Error message if join failed</summary>
     public string? ErrorMessage { get; set; }
@@ -113,34 +118,5 @@ public class PingMessage : P2PMessage
 public class PongMessage : P2PMessage
 {
     public override MessageTypeV2 Type => MessageTypeV2.Pong;
-}
-
-/// <summary>
-/// Information about a relay node
-/// </summary>
-[MessagePackObject(keyAsPropertyName: true)]
-public record RelayNodeInfo
-{
-    /// <summary>Node ID</summary>
     public byte[] NodeId { get; set; } = [];
-    
-    /// <summary>Public key</summary>
-    public byte[] PublicKey { get; set; } = [];
-    
-    /// <summary>External IP address</summary>
-    public string IPAddress { get; set; } = string.Empty;
-    
-    /// <summary>Port number</summary>
-    public int Port { get; set; } = 0;
-    
-    /// <summary>Services offered</summary>
-    public List<string> Services { get; set; } = [];
-    
-    /// <summary>Last seen timestamp</summary>
-    public long LastSeen { get; set; } = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
-    
-    /// <summary>Reputation score (0.0 to 1.0)</summary>
-    public float Reputation { get; set; } = 1.0f;
-    
-    public IPEndPoint ToEndPoint() => new(System.Net.IPAddress.Parse(IPAddress), Port);
 }

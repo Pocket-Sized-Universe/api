@@ -6,6 +6,8 @@ namespace PocketSizedUniverse.P2P;
 /// Base class for file transfer operations
 /// </summary>
 [MessagePackObject(keyAsPropertyName: true)]
+[Union(0, typeof(FileRequestMessage))]
+[Union(1, typeof(FileRequestResponseMessage))]
 public abstract class FileTransferMessage : P2PMessage
 {
     /// <summary>SHA-256 hash of the file being transferred</summary>

@@ -7,6 +7,11 @@ namespace PocketSizedUniverse.P2P;
 /// Base class for character data operations
 /// </summary>
 [MessagePackObject(keyAsPropertyName: true)]
+[Union(0, typeof(CharacterDataPushMessage))]
+[Union(1, typeof(CharacterDataRequestMessage))]
+[Union(2, typeof(CharacterDataResponseMessage))]
+[Union(3, typeof(CharacterDataUpdateMessage))]
+[Union(4, typeof(CharacterDataNotifyMessage))]
 public abstract class CharacterDataMessage : P2PMessage
 {
     /// <summary>Character data hash for identification</summary>

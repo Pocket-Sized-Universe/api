@@ -1,5 +1,6 @@
 using MessagePack;
 using System.Security.Cryptography;
+using NSec.Cryptography;
 
 namespace PocketSizedUniverse.P2P;
 
@@ -13,8 +14,7 @@ namespace PocketSizedUniverse.P2P;
 [Union(2, typeof(PeerMessage))]
 [Union(3, typeof(FileTransferMessage))]
 [Union(4, typeof(UserMessage))]
-[Union(5, typeof(GroupMessage))]
-[Union(6, typeof(CharacterDataMessage))]
+[Union(5, typeof(CharacterDataMessage))]
 public abstract class P2PMessage
 {
     /// <summary>Protocol version for compatibility checking</summary>
@@ -67,8 +67,10 @@ public abstract class P2PMessage
         var messageBytes = Serialize();
         Signature = originalSignature;
         
-        // Sign the serialized content
-        Signature = Ed25519.Sign(messageBytes, privateKey);
+        // Sign the serialized content using NSec Ed25519
+        var algorithm = SignatureAlgorithm.Ed25519;
+        using var key = Key.Import(algorithm, privateKey, KeyBlobFormat.RawPrivateKey);
+        Signature = algorithm.Sign(key, messageBytes);
     }
     
     /// <summary>
@@ -85,10 +87,12 @@ public abstract class P2PMessage
         var messageBytes = Serialize();
         Signature = originalSignature;
         
-        // Verify signature
+        // Verify signature using NSec Ed25519
         try
         {
-            return Ed25519.Verify(Signature, messageBytes, SenderPublicKey);
+            var algorithm = SignatureAlgorithm.Ed25519;
+            var publicKey = PublicKey.Import(algorithm, SenderPublicKey, KeyBlobFormat.RawPublicKey);
+            return algorithm.Verify(publicKey, messageBytes, Signature);
         }
         catch
         {

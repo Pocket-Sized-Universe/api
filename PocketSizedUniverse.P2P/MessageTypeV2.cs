@@ -6,7 +6,6 @@ namespace PocketSizedUniverse.P2P;
 /// P2P Message types for the distributed PocketSizedUniverse protocol.
 /// Based on ranges to avoid conflicts and support protocol versioning.
 /// </summary>
-[MessagePackObject(keyAsPropertyName: true)]
 public enum MessageTypeV2 : byte
 {
     // === DHT Operations (0-19) ===

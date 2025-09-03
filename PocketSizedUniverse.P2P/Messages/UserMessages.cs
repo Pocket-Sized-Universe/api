@@ -1,3 +1,4 @@
+using System.Net;
 using MessagePack;
 using PocketSizedUniverse.API.Data;
 
@@ -7,6 +8,12 @@ namespace PocketSizedUniverse.P2P;
 /// Base class for user/peer operations
 /// </summary>
 [MessagePackObject(keyAsPropertyName: true)]
+[Union(0, typeof(UserPairRequestMessage))]
+[Union(1, typeof(UserPairResponseMessage))]
+[Union(2, typeof(UserPairAcceptMessage))]
+[Union(3, typeof(UserPairRejectMessage))]
+[Union(4, typeof(UserPairRemoveMessage))]
+[Union(5, typeof(UserPresenceUpdateMessage))]
 public abstract class UserMessage : P2PMessage
 {
     /// <summary>User identity (Ed25519 public key as base58)</summary>
@@ -17,6 +24,12 @@ public abstract class UserMessage : P2PMessage
 /// Base class for peer discovery and presence
 /// </summary>
 [MessagePackObject(keyAsPropertyName: true)]
+[Union(0, typeof(PeerAnnounceMessage))]
+[Union(1, typeof(PeerAnnounceResponseMessage))]
+[Union(2, typeof(PeerLookupMessage))]
+[Union(3, typeof(PeerLookupResponseMessage))]
+[Union(4, typeof(PeerPresenceMessage))]
+[Union(5, typeof(PeerOfflineMessage))]
 public abstract class PeerMessage : P2PMessage
 {
     /// <summary>Peer's Ed25519 public key</summary>
@@ -30,12 +43,8 @@ public abstract class PeerMessage : P2PMessage
 public class UserPairRequestMessage : UserMessage
 {
     public override MessageTypeV2 Type => MessageTypeV2.UserPairRequest;
-    
-    /// <summary>Target user to pair with</summary>
-    public string TargetUserId { get; set; } = string.Empty;
-    
-    /// <summary>Optional pairing message</summary>
-    public string? Message { get; set; }
+
+    public P2PConnection
 }
 
 /// <summary>
@@ -183,12 +192,22 @@ public class PeerLookupResponseMessage : PeerMessage
 public class PeerPresenceMessage : PeerMessage
 {
     public override MessageTypeV2 Type => MessageTypeV2.PeerPresence;
-    
-    /// <summary>Whether peer is online</summary>
-    public bool IsOnline { get; set; } = true;
-    
-    /// <summary>Last activity timestamp</summary>
-    public long LastActivity { get; set; } = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+
+    public PeerPresence PeerPresence { get; set; } = new PeerPresence();
+}
+
+/// <summary>
+/// Represents peer presence information
+/// </summary>
+[MessagePackObject(keyAsPropertyName: true)]
+public class PeerPresence
+{
+    public string UserId { get; init; }
+    public byte[] NodeId { get; init; }
+    public IPEndPoint EndPoint { get; init; }
+    public DateTimeOffset LastSeen { get; init; }
+    public string[]? Capabilities { get; init; }
+    public string Status { get; init; } // online, away, busy, etc.
 }
 
 /// <summary>
