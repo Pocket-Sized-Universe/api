@@ -44,7 +44,7 @@ public class UserPairRequestMessage : UserMessage
 {
     public override MessageTypeV2 Type => MessageTypeV2.UserPairRequest;
 
-    public P2PConnection
+    public PeerInfo? PeerInfo { get; set; }
 }
 
 /// <summary>
@@ -220,26 +220,4 @@ public class PeerOfflineMessage : PeerMessage
     
     /// <summary>Reason for going offline</summary>
     public string Reason { get; set; } = "shutdown";
-}
-
-/// <summary>
-/// Information about a peer
-/// </summary>
-[MessagePackObject(keyAsPropertyName: true)]
-public record PeerInfo
-{
-    /// <summary>Peer's public key</summary>
-    public byte[] PublicKey { get; set; } = [];
-    
-    /// <summary>IP address</summary>
-    public string IPAddress { get; set; } = string.Empty;
-    
-    /// <summary>Port number</summary>
-    public int Port { get; set; } = 0;
-    
-    /// <summary>Last seen timestamp</summary>
-    public long LastSeen { get; set; } = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
-    
-    /// <summary>Services this peer offers</summary>
-    public List<string> Services { get; set; } = [];
 }
