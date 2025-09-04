@@ -9,6 +9,6 @@ public record CharaDataDownloadDto(string Id, UserData Uploader) : CharaDataDto(
     public string GlamourerData { get; init; } = string.Empty;
     public string CustomizeData { get; init; } = string.Empty;
     public string ManipulationData { get; set; } = string.Empty;
-    public List<GamePathEntry> FileGamePaths { get; init; } = [];
-    public List<GamePathEntry> FileSwaps { get; init; } = [];
+    public List<FileRedirectEntry> FileRedirects { get; init; } = [];
+    public List<TorrentFileEntry> FileSwaps { get; init; } = [];
 }

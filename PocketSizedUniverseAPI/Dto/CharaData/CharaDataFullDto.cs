@@ -1,5 +1,6 @@
 ﻿using PocketSizedUniverse.API.Data;
 using MessagePack;
+using PocketSizedUniverse.API.Dto.Files;
 
 namespace PocketSizedUniverse.API.Dto.CharaData;
 
@@ -14,16 +15,21 @@ public record CharaDataFullDto(string Id, UserData Uploader) : CharaDataDto(Id, 
     public int DownloadCount { get; set; } = 0;
     public List<UserData> AllowedUsers { get; set; } = [];
     public List<GroupData> AllowedGroups { get; set; } = [];
-    public List<GamePathEntry> FileGamePaths { get; set; } = [];
-    public List<GamePathEntry> FileSwaps { get; set; } = [];
-    public List<GamePathEntry> OriginalFiles { get; set; } = [];
+    public List<TorrentFileEntry> FileSwaps { get; set; } = [];
+    public List<FileRedirectEntry> FileRedirects { get; set; } = [];
     public AccessTypeDto AccessType { get; set; }
     public ShareTypeDto ShareType { get; set; }
     public List<PoseEntry> PoseData { get; set; } = [];
 }
 
 [MessagePackObject(keyAsPropertyName: true)]
-public record GamePathEntry(string HashOrFileSwap, string GamePath);
+public record GamePathEntry(string GamePath);
+
+[MessagePackObject(keyAsPropertyName: true)]
+public record TorrentFileEntry(string Hash, string GamePath, TorrentFileDto TorrentFile) : GamePathEntry(GamePath);
+
+[MessagePackObject(keyAsPropertyName: true)]
+public record FileRedirectEntry(string SwapPath, string GamePath) : GamePathEntry(GamePath);
 
 [MessagePackObject(keyAsPropertyName: true)]
 public record PoseEntry(long? Id)

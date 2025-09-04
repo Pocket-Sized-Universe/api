@@ -1,6 +1,6 @@
 ﻿namespace PocketSizedUniverse.API.Dto.Files;
 
-public interface ITransferFileDto
+public interface IFileDto
 {
     string ForbiddenBy { get; set; }
     string Hash { get; set; }
