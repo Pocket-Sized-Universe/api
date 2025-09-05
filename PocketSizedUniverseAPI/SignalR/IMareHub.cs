@@ -2,6 +2,7 @@
 using PocketSizedUniverse.API.Data.Enum;
 using PocketSizedUniverse.API.Dto;
 using PocketSizedUniverse.API.Dto.CharaData;
+using PocketSizedUniverse.API.Dto.Files;
 using PocketSizedUniverse.API.Dto.Group;
 using PocketSizedUniverse.API.Dto.User;
 
@@ -88,4 +89,6 @@ public interface IMareHub
     Task GposeLobbyPushCharacterData(CharaDataDownloadDto charaDownloadDto);
     Task GposeLobbyPushPoseData(PoseData poseData);
     Task GposeLobbyPushWorldData(WorldData worldData);
+    Task CreateTorrentFile(TorrentFileDto torrentFileDto);
+    Task<TorrentFileDto?> GetTorrentFile(string hash);
 }

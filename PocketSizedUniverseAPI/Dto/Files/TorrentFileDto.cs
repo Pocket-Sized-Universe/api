@@ -10,6 +10,6 @@ public record TorrentFileDto : IFileDto
     public bool IsForbidden { get; set; }
     public string Extension { get; set; }
     public string Filename => Hash + Extension;
+    public string TorrentName => Hash + ".torrent";
     public byte[] Data { get; set; }
-    public string MagnetLink { get; set; }
 }

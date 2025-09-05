@@ -1,5 +1,6 @@
 ﻿using PocketSizedUniverse.API.Data.Enum;
 using MessagePack;
+using PocketSizedUniverse.API.Dto.CharaData;
 using System.Security.Cryptography;
 
 using System.Text;
@@ -27,7 +28,8 @@ public class CharacterData
     [JsonIgnore]
     public Lazy<string> DataHash { get; }
 
-    public Dictionary<ObjectKind, List<FileReplacementData>> FileReplacements { get; set; } = new();
+    public Dictionary<ObjectKind, List<FileRedirectEntry>> FileReplacements { get; set; } = new();
+    public Dictionary<ObjectKind, List<TorrentFileEntry>> FileSwaps { get; set; } = new();
     public Dictionary<ObjectKind, string> GlamourerData { get; set; } = new();
     public string HeelsData { get; set; } = string.Empty;
     public string HonorificData { get; set; } = string.Empty;

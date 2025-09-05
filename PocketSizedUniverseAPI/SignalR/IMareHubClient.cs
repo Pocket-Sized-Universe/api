@@ -2,6 +2,7 @@
 using PocketSizedUniverse.API.Data.Enum;
 using PocketSizedUniverse.API.Dto;
 using PocketSizedUniverse.API.Dto.CharaData;
+using PocketSizedUniverse.API.Dto.Files;
 using PocketSizedUniverse.API.Dto.Group;
 using PocketSizedUniverse.API.Dto.User;
 

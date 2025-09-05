@@ -12,8 +12,8 @@ public record CharaDataUpdateDto(string Id)
     public string? ManipulationData { get; set; }
     public List<string>? AllowedUsers { get; set; }
     public List<string>? AllowedGroups { get; set; }
-    public List<GamePathEntry>? FileGamePaths { get; set; }
-    public List<GamePathEntry>? FileSwaps { get; set; }
+    public List<FileRedirectEntry>? FileRedirects { get; set; }
+    public List<TorrentFileEntry>? FileSwaps { get; set; }
     public AccessTypeDto? AccessType { get; set; }
     public ShareTypeDto? ShareType { get; set; }
     public List<PoseEntry>? Poses { get; set; }
