@@ -81,7 +81,6 @@ public interface IMareHub
     Task<CharaDataDownloadDto?> CharaDataDownload(string id);
     Task<List<CharaDataFullDto>> CharaDataGetOwn();
     Task<List<CharaDataMetaInfoDto>> CharaDataGetShared();
-    Task<CharaDataFullDto?> CharaDataAttemptRestore(string id);
 
     Task<string> GposeLobbyCreate();
     Task<List<UserData>> GposeLobbyJoin(string lobbyId);
