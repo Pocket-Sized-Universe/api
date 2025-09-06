@@ -14,8 +14,6 @@ public interface IMareHub
     const string Path = "/mare";
 
     Task<bool> CheckClientHealth();
-
-    Task Client_DownloadReady(Guid requestId);
     Task Client_GroupChangePermissions(GroupPermissionDto groupPermission);
     Task Client_GroupDelete(GroupDto groupDto);
     Task Client_GroupPairChangeUserInfo(GroupPairUserInfoDto userInfo);
@@ -89,4 +87,5 @@ public interface IMareHub
     Task GposeLobbyPushPoseData(PoseData poseData);
     Task GposeLobbyPushWorldData(WorldData worldData);
     Task<TorrentFileDto?> GetTorrentFileForHash(string hash);
+    Task<List<TorrentFileDto>> GetPreloadTorrentFiles(UserDto userDto);
 }

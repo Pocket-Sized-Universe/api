@@ -10,8 +10,6 @@ namespace PocketSizedUniverse.API.SignalR;
 
 public interface IMareHubClient : IMareHub
 {
-    void OnDownloadReady(Action<Guid> act);
-
     void OnGroupChangePermissions(Action<GroupPermissionDto> act);
 
     void OnGroupDelete(Action<GroupDto> act);
