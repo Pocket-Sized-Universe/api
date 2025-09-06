@@ -87,5 +87,4 @@ public interface IMareHub
     Task GposeLobbyPushPoseData(PoseData poseData);
     Task GposeLobbyPushWorldData(WorldData worldData);
     Task<TorrentFileDto?> GetTorrentFileForHash(string hash);
-    Task<List<TorrentFileDto>> GetPreloadTorrentFiles(UserDto userDto);
 }
