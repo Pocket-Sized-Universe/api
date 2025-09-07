@@ -26,7 +26,7 @@ public record CharaDataFullDto(string Id, UserData Uploader) : CharaDataDto(Id, 
 public record GamePathEntry(string GamePath);
 
 [MessagePackObject(keyAsPropertyName: true)]
-public record TorrentFileEntry(string Hash, string GamePath, TorrentFileDto TorrentFile) : GamePathEntry(GamePath);
+public record TorrentFileEntry(byte[] Hash, string GamePath, TorrentFileDto TorrentFile) : GamePathEntry(GamePath);
 
 [MessagePackObject(keyAsPropertyName: true)]
 public record FileRedirectEntry(string SwapPath, string GamePath) : GamePathEntry(GamePath);

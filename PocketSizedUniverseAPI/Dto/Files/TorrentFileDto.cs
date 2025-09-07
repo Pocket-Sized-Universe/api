@@ -1,4 +1,6 @@
 ﻿using MessagePack;
+using System.Buffers.Text;
+using System.Text;
 
 namespace PocketSizedUniverse.API.Dto.Files;
 
@@ -6,10 +8,11 @@ namespace PocketSizedUniverse.API.Dto.Files;
 public record TorrentFileDto : IFileDto
 {
     public string ForbiddenBy { get; set; }
-    public string Hash { get; set; }
+    public byte[] Hash { get; set; }
     public bool IsForbidden { get; set; }
     public string Extension { get; set; }
     public string Filename => Hash + Extension;
     public string TorrentName => Hash + ".torrent";
     public byte[] Data { get; set; }
+    public string GamePath { get; set; }
 }
