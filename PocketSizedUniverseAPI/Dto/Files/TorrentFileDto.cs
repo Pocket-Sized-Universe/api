@@ -20,6 +20,6 @@ public static class TorrentFileDtoExtensions
 {
     public static string ShortHash(this byte[] hash)
     {
-        return Encoding.UTF8.GetString(hash).Replace("/", "_").Replace("+", "-");
+        return Convert.ToBase64String(hash).Replace("/", "_").Replace("+", "-");
     }
 }
