@@ -11,9 +11,15 @@ public record TorrentFileDto : IFileDto
     public byte[] Hash { get; set; }
     public bool IsForbidden { get; set; }
     public string Extension { get; set; }
-    public string ShortHash => Convert.ToBase64String(Hash);
-    public string Filename => ShortHash + Extension;
-    public string TorrentName => Hash + ".torrent";
+    public string Filename => Hash.ShortHash() + Extension;
+    public string TorrentName => Hash.ShortHash() + ".torrent";
     public byte[] Data { get; set; }
     public string GamePath { get; set; }
+}
+public static class TorrentFileDtoExtensions
+{
+    public static string ShortHash(this byte[] hash)
+    {
+        return Encoding.UTF8.GetString(hash).Replace("/", "_").Replace("+", "-");
+    }
 }
