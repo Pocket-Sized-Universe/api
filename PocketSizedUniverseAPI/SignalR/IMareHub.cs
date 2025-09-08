@@ -88,4 +88,5 @@ public interface IMareHub
     Task GposeLobbyPushWorldData(WorldData worldData);
     Task<TorrentFileDto?> GetTorrentFileForHash(byte[] hash);
     Task CreateNewTorrentFileEntry(TorrentFileDto torrentFileDto);
+    Task<List<TorrentFileDto>> GetSuperSeederPackage(long maxFiles);
 }
